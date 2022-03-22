@@ -4,6 +4,8 @@ import { BcryptProvider } from '@shared/providers/encrypt/implementations/bcrypt
 import { UserRepository } from '@shared/repositories/user.repository';
 import {  CreateuserController } from './contexts/create/create.controller';
 import {  CreateUserService } from './contexts/create/create.service';
+import { GetAllUserController } from './contexts/getAll/getAll.controller';
+import { GetAllUserService } from './contexts/getAll/getAll.service';
 
 @Module({
   imports: [
@@ -13,9 +15,11 @@ import {  CreateUserService } from './contexts/create/create.service';
   providers: [
     { provide: 'ENCRYPT_PROVIDER', useClass: BcryptProvider },
     CreateUserService,
+    GetAllUserService
   ],
   controllers: [
     CreateuserController,
+    GetAllUserController
   ],
 })
 export class UserModule {}

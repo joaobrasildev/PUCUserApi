@@ -20,7 +20,8 @@ export class UserRepository extends Repository<User> {
 
   async findAllUsers(): Promise<User[]> {
     let users = await this.find();
-    return users.length === 0 ? users : [];
+
+    return users.length ? users : [];
   }
 
   async findOneUser(id: string): Promise<User | undefined> {
