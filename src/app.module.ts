@@ -1,3 +1,4 @@
+import { UserModule } from '@modules/user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,6 +15,7 @@ const databaseOptions = {
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(databaseOptions),
+    UserModule
   ],
 })
 export class AppModule {}
