@@ -1,3 +1,5 @@
+import { AuthModule } from '@modules/auth/signin.module';
+import { RoleModule } from '@modules/role/role.module';
 import { UserModule } from '@modules/user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -17,7 +19,9 @@ const databaseOptions = {
     }),
     TypeOrmModule.forRoot(databaseOptions),
     UserModule,
-    EncryptProviderModule
+    EncryptProviderModule,
+    RoleModule,
+    AuthModule
   ],
 })
 export class AppModule {}

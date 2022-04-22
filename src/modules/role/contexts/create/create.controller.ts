@@ -4,16 +4,15 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CreateUserRequestDTO } from '@shared/dtos/user/createUserRequest.dto';
-import { CreateUserService } from './create.service';
 import { instanceToInstance } from 'class-transformer';
+import { CreateRoleRequestBodyDTO } from '@shared/dtos/role/createRoleRequestBody.dto';
+import { CreateRoleService } from './create.service';
 import { apiTags } from '@shared/constants/apiTags';
-import { User } from '@shared/database/entities/user.entity';
 
-@ApiTags(apiTags.USER)
-@Controller('users')
-export class CreateuserController {
-  constructor(private service: CreateUserService) {}
+@ApiTags(apiTags.ROLE)
+@Controller('roles')
+export class CreateRoleController {
+  constructor(private createRoleService: CreateRoleService) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -23,18 +22,16 @@ export class CreateuserController {
     }),
   )
   @ApiCreatedResponse({
-    type: User,
+    type: CreateRoleRequestBodyDTO,
   })
   @ApiBadRequestResponse({
     description: 'This will be returned when has validation error',
   })
   public async create(
-    @Body() dto: CreateUserRequestDTO,
+    @Body() createRoleRequestBodyDTO: CreateRoleRequestBodyDTO,
   ) {
-    const user = await this.service.execute(
-      dto,
-    );
+    const role = await this.createRoleService.execute(createRoleRequestBodyDTO);
 
-    return instanceToInstance(user);
+    return instanceToInstance(role);
   }
 }

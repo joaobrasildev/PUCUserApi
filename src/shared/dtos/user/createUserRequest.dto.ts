@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsNotEmpty, IsString } from "class-validator";
+import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateUserRequestDTO {
   @ApiProperty()
@@ -28,7 +28,7 @@ export class CreateUserRequestDTO {
   cpf: string;
 
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()  
   birthDate: Date;
 
@@ -46,4 +46,45 @@ export class CreateUserRequestDTO {
   @IsString()
   @IsNotEmpty()  
   gender: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  postalCode: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  street: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  number: number;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  complement: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  neighborhood: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  state: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  city: string;  
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  role_id: string;  
+
 }

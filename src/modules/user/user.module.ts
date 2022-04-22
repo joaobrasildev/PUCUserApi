@@ -6,6 +6,8 @@ import {  CreateuserController } from './contexts/create/create.controller';
 import {  CreateUserService } from './contexts/create/create.service';
 import { GetAllUserController } from './contexts/getAll/getAll.controller';
 import { GetAllUserService } from './contexts/getAll/getAll.service';
+import { GetOneUserController } from './contexts/getOne/getOne.controller';
+import { GetOneUserService } from './contexts/getOne/getOne.service';
 
 @Module({
   imports: [
@@ -15,11 +17,13 @@ import { GetAllUserService } from './contexts/getAll/getAll.service';
   providers: [
     { provide: 'ENCRYPT_PROVIDER', useClass: BcryptProvider },
     CreateUserService,
-    GetAllUserService
+    GetAllUserService,
+    GetOneUserService,
   ],
   controllers: [
     CreateuserController,
-    GetAllUserController
+    GetAllUserController,
+    GetOneUserController,
   ],
 })
 export class UserModule {}

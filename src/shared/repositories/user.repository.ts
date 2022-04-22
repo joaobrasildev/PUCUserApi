@@ -19,30 +19,20 @@ export class UserRepository extends Repository<User> {
   }
 
   async findAllUsers(): Promise<User[]> {
-    let users = await this.find();
+    let users = await this.find({ relations: ['role'] });
 
     return users.length ? users : [];
   }
 
   async findOneUser(id: string): Promise<User | undefined> {
     return await this.findOne(
-      { id }
+      { id },
+      { relations: ['role'] }
     );
   }
 
   async updateUser(dto: UpdateUserDTO): Promise<void> {
     await this.update(dto.id, dto);
-  }
-
-  async activeDeactivate(id: string, active: boolean): Promise<void> {
-    await this.update(id, { active });
-  }
-
-  async approveDisapprove(
-    id: string,
-    approved: boolean,
-  ): Promise<void> {
-    await this.update(id, { approved });
   }
 
   async deleteUser(id: string): Promise<void> {

@@ -5,10 +5,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { Role } from './role.entity';
 
 @Entity('users')
 @Unique(['email'])
@@ -54,11 +57,37 @@ export class User {
   @Column()
   gender: string;
 
-  @Column({ default: false })
-  active: boolean;
+  @ApiProperty()
+  @Column({ nullable: false })
+  postalCode: string;
 
-  @Column({ default: false })
-  approved: boolean;
+  @ApiProperty()
+  @Column({ nullable: false })
+  street: string;
+
+  @ApiProperty()
+  @Column({ nullable: false })
+  number: number;
+
+  @ApiProperty()
+  @Column({ nullable: false })
+  complement: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  neighborhood: string;
+
+  @ApiProperty()
+  @Column({ nullable: false })
+  city: string;
+
+  @ApiProperty()
+  @Column({ nullable: false })
+  state: string;
+
+  @ApiProperty()
+  @Column({ nullable: false })
+  role_id: string;
 
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date;
@@ -68,4 +97,10 @@ export class User {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   public deletedAt: Date;
+
+  @ManyToOne(() => Role, (role) => role.users, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'role_id' })
+  public role?: Role;  
 }
