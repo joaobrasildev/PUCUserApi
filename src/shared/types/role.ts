@@ -1,0 +1,1 @@
+export type roles = 'ADMIN_ONE | ADMIN_TWO | ADMIN_TREE | PAINTER | CUSTOMER';
